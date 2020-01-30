@@ -38,7 +38,7 @@ jobs:
 
       - run: yarn build
 
-      -aws-s3/sync:
+      - aws-s3/sync:
         from: build
         to: 's3://my-test-react-app/' 
         arguments: |
