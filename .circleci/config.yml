@@ -1,4 +1,7 @@
 version: 2
+orbs:
+  
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
     docker:
@@ -32,3 +35,14 @@ jobs:
       - run: yarn lint      
       # run tests!
       - run: yarn test
+
+      - run: yarn build
+
+      -aws-s3/sync:
+        from: build
+        to: 's3://my-test-react-app/' 
+        arguments:
+          --acl public-read \
+          --cache-control "max-age=86400"
+        overwrite: true
+
