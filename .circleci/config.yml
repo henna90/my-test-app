@@ -33,11 +33,11 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       #run lint
       - run: yarn lint  
-      - run: yarn size    
+      - run: yarn build    
       # run tests!
       - run: yarn test
 
-      - run: yarn build
+      
 
       - aws-s3/sync:
           from: build
